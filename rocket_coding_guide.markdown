@@ -98,5 +98,5 @@ Rails
 
 + Don't use scaffolding
 
-+ Consider using 'resource\_this' for your fairly straight forward resource'y controllers: https://github.com/jnewland/resource_this
++ Consider using [resource\_this](https://github.com/jnewland/resource_this) for your fairly straight forward resource'y controllers.
 
