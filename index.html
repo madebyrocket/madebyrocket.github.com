@@ -1,0 +1,76 @@
+<h1>ROCKET CODING GUIDE</h1>
+
+<h2>Objective-C</h2>
+
+<p>A lot of this is based on the <a href="http://www.cimgf.com/zds-code-style-guide/">ZDS Style Guide</a></p>
+
+<ul>
+<li><p>Add -Wall (all warnings) and -Werror (warnings are errors) to the additional flags. This catches a lot of things and keeps the code warning free.</p></li>
+<li><p>Check the 'analyze' option in the projects settings so klang runs during each build.</p></li>
+<li><p>2 spaces for tabs.</p></li>
+<li><p>Put your @synthesize entries at the bottom of your .m</p></li>
+<li><p>Put your -dealloc, -viewDidUnload and -cleanup methods at the top of your .m</p></li>
+<li><p>In your cleanup or dealloc, use self.someProperty = nil to free a retained property.</p></li>
+<li><p>If allowed by the project's target runtime, only define your attributes using @property. Meaning, don't duplicate them in the interface definition. This is allowed if deploying on iOS 4+ or 64bit Mac.</p></li>
+<li><p>Use dot notation</p></li>
+<li><p>Do <em>not</em> do fancy formatting of methods like:</p></li>
+</ul>
+
+<pre><code>[pants thisIsMy:fancy
+         method:trucks
+           isOK:NO];</code></pre>
+
+<p>Instead put it all on one line and let Xcode wrap it for you.</p>
+
+<pre><code>[pants thisIsMy:fancy method:trucks isOK:YES];
+</code></pre>
+
+<p>There are exceptions to the above rule: dictionaryWithObjectsAndKeys: should have one line per object and key pair and the trailing nil should also be on its own line. Just use your best judgement here.</p>
+
+<ul>
+<li><p>NSLog should not be used in production projects. An alternative debug logging mechanism should be used. One we can turn off in release builds.</p></li>
+<li><p>If an app is to access NSUserDefaults, it should have an app specific Settings singleton (Google SynthesizeSingleton.h or ask Brian for existing examples). Each setting should have a @property and a custom setter and getter that does the NSUserDefaults talking and synchronizing.</p></li>
+<li><p>Storing items in the keychain (passwords/etc) should also go through a Settings singleton as a property.</p></li>
+<li><p>Projects using Core Data should use mogenerator: https://github.com/rentzsch/mogenerator</p></li>
+<li><p>Projects using Core Data should use Active Record Fetching For Core Data: https://github.com/magicalpanda/activerecord-fetching-for-core-data</p></li>
+<li><p>Projects using Core Data should consider having all the NSPredicate fetching and all defined in the mogenerate'd models instead of scattering them all about. So add methods like: </p></li>
+</ul>
+
+<pre><code>+ (NSArray *) allInGallery:(GGallery *)aGallery</code></pre>
+
+<p>and let that method do the Active Record for Core Data fetch.</p>
+
+<ul>
+<li><p>Projects using Core Data should use NSFetchedResultsController when appropriate.</p></li>
+<li><p>Projects accessing the internets should use ASIHTTPRequest and SBJSON where appropriate: http://allseeing-i.com/ASIHTTPRequest/</p></li>
+<li><p>Projects should consider using https://github.com/mikeash/MACollectionUtilities</p></li>
+<li><p>MBProgressHUD should be used for modal spinners: https://github.com/jdg/MBProgressHUD</p></li>
+<li><p>Direct use of the GCD API's should be reserved for very specific cases that need it. Instead, prefer NSOperation &amp; NSOperationQueue, which will use GCD behind the scenes for free.</p></li>
+<li><p>Run your main debug scheme with the argument "NSZombieEnabled" "YES" </p></li>
+</ul>
+
+<h2>Git</h2>
+
+<ul>
+<li><p>All production projects should be stored on madebyrocket's github account</p></li>
+<li><p>git submodule's should <em>not</em> be used unless it's <em>really</em> needed.</p></li>
+</ul>
+
+<h2>Ruby</h2>
+
+<ul>
+<li>2 spaces for tabs</li>
+</ul>
+
+<h2>Rails</h2>
+
+<ul>
+<li><p>Devise for authentication</p></li>
+<li><p>rspec for tests</p></li>
+<li><p>factory_girl for factories</p></li>
+<li><p>haml for views</p></li>
+<li><p>jQuery for JS</p></li>
+<li><p>Try real hard to stick to RESTful controllers. Think hard before adding a method to a controller that isn't one of the 7: index, new, create, show, edit, update, destroy.</p></li>
+<li><p>Don't use scaffolding</p></li>
+<li><p>Consider using 'resource_this' for your fairly straight forward resource'y controllers: https://github.com/jnewland/resource_this</p></li>
+</ul>
