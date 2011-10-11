@@ -14,7 +14,7 @@ A lot of this is based on the [ZDS Style Guide](http://www.cimgf.com/zds-code-st
 
 + 2 spaces for tabs.
 
-+ Put your @synthesize entries at the bottom of your .m
++ Put your @synthesize entries at the top of your .m and and give them a protected instance variable, like @synthesize foo = _foo;. Only define the @property. Don't define _foo in the interface.
 
 + Put your -dealloc, -viewDidUnload and -cleanup methods at the top of your .m
 
